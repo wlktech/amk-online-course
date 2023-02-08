@@ -1,0 +1,17 @@
+{
+    "name": "sql/app",
+    "autoload": {
+        "psr-4": {
+            "Sql\\App\\": "src/Libs/"
+        }
+    },
+    "authors": [
+        {
+            "name": "wailinnkyaw03",
+            "email": "102975967+wailinnkyaw03@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.21"
+    }
+}
