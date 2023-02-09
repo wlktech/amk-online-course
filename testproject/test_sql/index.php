@@ -7,6 +7,13 @@ $users = $db->GetAllUser();
 $cities = $db->GetUniqueCity();
 $uniqueUsers = $db->GetUniqueUser();
 $names = $db->CountName();
+$totals = $db->getTotalSalary();
+$avgs = $db->getAvgSalary();
+$mins = $db->getMinSalary();
+$maxs = $db->getMaxSalary();
+$specscolumns = $db->getColumnNameAgeCity();
+$greater30Users = $db->getAgeGreaterThan30();
+
 // echo "<pre>";
 // print_r($cities);
 // echo "</pre>";
@@ -57,6 +64,33 @@ $names = $db->CountName();
                 <td><?= $user->city; ?></td>
                 <td><?= $user->salary; ?></td>
             
+        </tr>
+        <?php endforeach; ?>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="card">
+     <div class="card-header">
+      <h4>Greater Than 30</h4>
+     </div>
+     <div class="card-body">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Greater Than 30</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+            <?php foreach($greater30Users as $key=>$greater30User) : ?>
+                <td><?= $greater30User->id; ?></td>
+                <td><?= $greater30User->name; ?></td>
+                <td><?= $greater30User->age; ?></td>
+                <td><?= $greater30User->sex; ?></td>
+                <td><?= $greater30User->doj; ?></td>
+                <td><?= $greater30User->city; ?></td>
+                <td><?= $greater30User->salary; ?></td>
         </tr>
         <?php endforeach; ?>
        </tbody>
@@ -131,6 +165,118 @@ $names = $db->CountName();
       </table>
      </div>
     </div>
+    <div class="card">
+     <div class="card-header">
+      <h4>Total Salary</h4>
+     </div>
+     <div class="card-body">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Total Salary</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+            <?php foreach($totals as $key=>$total) : ?>
+                <td><?= $total->total_salary; ?></td>
+            
+        </tr>
+        <?php endforeach; ?>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="card">
+     <div class="card-header">
+      <h4>Average Salary</h4>
+     </div>
+     <div class="card-body">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Average Salary</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+            <?php foreach($avgs as $key=>$avg) : ?>
+                <td><?= $avg->avg_salary; ?></td>
+            
+        </tr>
+        <?php endforeach; ?>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="card">
+     <div class="card-header">
+      <h4>Minimun Salary</h4>
+     </div>
+     <div class="card-body">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Minimun Salary</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+            <?php foreach($mins as $key=>$min) : ?>
+                <td><?= $min->min_salary; ?></td>
+            
+        </tr>
+        <?php endforeach; ?>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="card">
+     <div class="card-header">
+      <h4>Maximum Salary</h4>
+     </div>
+     <div class="card-body">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Maximum Salary</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+            <?php foreach($maxs as $key=>$max) : ?>
+                <td><?= $max->max_salary; ?></td>
+            
+        </tr>
+        <?php endforeach; ?>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="card">
+     <div class="card-header">
+      <h4>Specified Columns</h4>
+     </div>
+     <div class="card-body">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Specified Columns</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+            <?php foreach($specscolumns as $key=>$specscolumn) : ?>
+                <td><?= $specscolumn->name; ?></td>
+                <td><?= $specscolumn->age; ?></td>
+                <td><?= $specscolumn->city; ?></td>
+        </tr>
+        <?php endforeach; ?>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    
    </div>
    
   </div>
