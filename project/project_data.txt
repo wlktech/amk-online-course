@@ -1,0 +1,16 @@
+dbname = wlk
+table name - users 
+columns
+id int primary key auto_increment
+name varchar(30)
+age int
+gender char(1)
+doj date
+city varchar(30)
+salary float
+
+table name - categories
+columns
+id int primary key auto_increment
+category_name varchar(30)
+created_at timestamp 
