@@ -1,0 +1,17 @@
+{
+    "name": "wlk-online/shop",
+    "autoload": {
+        "psr-4": {
+            "WlkOnline\\Shop\\": "src/Libs/"
+        }
+    },
+    "authors": [
+        {
+            "name": "wailinnkyaw03",
+            "email": "wailinnkyaw03@gmail.com"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.21"
+    }
+}
