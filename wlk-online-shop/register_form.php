@@ -17,7 +17,7 @@ include "./includes/topsidebar.php";
             <div class="content-header row">
             </div>
             <div class="content-body">
-               
+               <h1>Register</h1>
             </div>
         </div>
     </div>
