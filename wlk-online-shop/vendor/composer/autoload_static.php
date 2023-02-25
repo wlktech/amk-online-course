@@ -11,32 +11,40 @@ class ComposerStaticInitbce36eb578160a4977ba6e7c39279ea7
     );
 
     public static $prefixLengthsPsr4 = array (
-        'W' => 
-        array (
-            'WlkOnline\\Shop\\' => 15,
-        ),
         'P' => 
         array (
             'Psr\\Container\\' => 14,
+        ),
+        'H' => 
+        array (
+            'Helpers\\' => 8,
         ),
         'F' => 
         array (
             'Faker\\' => 6,
         ),
+        'A' => 
+        array (
+            'App\\WlkOnlineShop\\' => 18,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'WlkOnline\\Shop\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Libs',
-        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'Helpers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Helpers',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
+        ),
+        'App\\WlkOnlineShop\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Libs',
         ),
     );
 

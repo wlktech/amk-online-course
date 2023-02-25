@@ -8,7 +8,6 @@
     <!-- BEGIN: Vendor JS-->
     <script src="./admin/app-assets/vendors/js/vendors.min.js"></script>
     <!-- BEGIN Vendor JS-->
-
     <!-- BEGIN: Page Vendor JS-->
     <script src="./admin/app-assets/vendors/js/ui/jquery.sticky.js"></script>
     <script src="./admin/app-assets/vendors/js/charts/chartist.min.js"></script>

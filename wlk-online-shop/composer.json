@@ -2,7 +2,8 @@
     "name": "wlk-online/shop",
     "autoload": {
         "psr-4": {
-            "WlkOnline\\Shop\\": "src/Libs/"
+            "App\\WlkOnlineShop\\": "src/Libs/",
+            "Helpers\\": "src/Helpers/"
         }
     },
     "authors": [
