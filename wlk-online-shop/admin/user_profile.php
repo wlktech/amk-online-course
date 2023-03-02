@@ -1,5 +1,6 @@
 <?php 
 include "../vendor/autoload.php";
+// use Helpers\HTTP;
 use App\WlkOnlineShop\Databases\CountryModel;
 use App\WlkOnlineShop\Databases\StateModel;
 use App\WlkOnlineShop\Databases\FavMovieModel;
@@ -12,7 +13,11 @@ $fav_movies = FavMovieModel::FavouriteMovieOptions();
 $fav_musics = FavMusicModel::FavouriteMusicOptions();
 $languages = LanguageModel::LanguageOption();
 
-
+// $auth = Auth::check();
+// echo "<pre>";
+// print_r($auth);
+// echo "</pre>";
+// die();
 
 include "layouts/head.php";
 

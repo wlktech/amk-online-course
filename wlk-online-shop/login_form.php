@@ -69,6 +69,18 @@
                                     </div>
                                     <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"><span>OR Using Account
                                             Details</span></p>
+
+                                    <!-- msg session alert -->
+                                    <?php if(isset($_GET['msg'])){ ?>
+                                            <div class="alert alert-danger alert-dismissible fade show">
+                                                <strong>Failed!</strong><?= $_GET['msg'] ?>
+                                                <button type="button" class="close" data-dismiss="alert">
+                                                <span>&times;</span>
+                                                </button>
+                                            </div>
+                                    <?php unset($_SESSION['msg']) ?>
+                                    <?php } ?>
+                                            <!-- msg session alert -->
                                     <div class="card-body">
                                         <form class="form-horizontal" action="_actions/login.php" novalidate method="post">
                                             <fieldset class="form-group position-relative has-icon-left">

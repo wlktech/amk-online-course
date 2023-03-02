@@ -29,10 +29,12 @@
                 </li>
                 <li class=" navigation-header"><span data-i18n="User Interface">User Interface</span><i class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right" data-original-title="User Interface"></i>
                 </li>
-                <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="Components">Components</span></a>
+                <li class=" nav-item"><a href="#"><i class="la la-server"></i><span class="menu-title" data-i18n="Components">User Management</span></a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="component-alerts.html"><i></i><span data-i18n="Alerts">Alerts</span></a>
+                        <?php if($auth->value==1){ ?>
+                        <li><a class="menu-item" href="user_index.php"><i></i><span data-i18n="Alerts">User Index</span></a>
                         </li>
+                        <?php } ?>
                         <li><a class="menu-item" href="component-callout.html"><i></i><span data-i18n="Callout">Callout</span></a>
                         </li>
                         <li><a class="menu-item" href="#"><i></i><span data-i18n="Buttons">Buttons</span></a>

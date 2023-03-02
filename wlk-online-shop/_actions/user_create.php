@@ -23,8 +23,8 @@ $data = [
     'fav_movie' => $_POST['fav_movie'],
     'fav_music' => $_POST['fav_music'],
     'website' => $_POST['website'],
-    'status' => 'pending',
-    'role_id' => '1',
+    'status' => 'approved',
+    'role_id' => '2',
     
    ];
    
