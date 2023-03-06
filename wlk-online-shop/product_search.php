@@ -27,6 +27,12 @@ if(isset($_GET['page'])){
 $offset = ($page - 1)* $limit;
 $product_data = $db->ProductPagination($offset, $limit);
 
+if(isset($_POST['search'])){
+    $search = $_POST['search'];
+    $product_search = $db->ProductSearch($search);
+}else{
+    $product_search = $db->getAllProduct();
+}
 
 ?>
 
@@ -85,7 +91,7 @@ include "./includes/topsidebar.php";
                             </div>
                         </div>
                         <div class="row match-height">
-                            <?php foreach($product_data as $product){ ?>
+                            <?php foreach($product_search as $product){ ?>
                             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                                 <div class="card pull-up">
                                     <div class="card-content">
@@ -106,7 +112,7 @@ include "./includes/topsidebar.php";
                                             </a>
                                             <div class="product-action d-flex justify-content-around">
                                                 <a href="#like" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ft-heart"></i></a><span class="saperator">|</span>
-                                                <a href="product_detail.php?id=<?= $product->id ?>" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ft-eye"></i></a><span class="saperator">|</span>
+                                                <a href="#view" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ft-eye"></i></a><span class="saperator">|</span>
                                                 <a href="#compare" data-toggle="tooltip" data-placement="top" title="Compare"><i class="ft-sliders"></i></a><span class="saperator">|</span>
                                                 <a href="#cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ft-shopping-cart"></i></a>
                                             </div>
@@ -115,7 +121,14 @@ include "./includes/topsidebar.php";
                                 </div>
                             </div>
                             <?php } ?>
-                            
+                            <?php 
+                            if(count($product_search) == 0){ ?>
+                                <div class="text-center m-auto pb-3">
+                                    <h1 >No Data Found</h1>
+                                    <p class="">Sorry, but the page you are looking for has not been found. Try checking the URL error, then hit the refresh button on your browser or try found something else in our app.</p>
+                                    <a href="index.php" class="btn btn-primary">Back To Home</a>
+                                </div>
+                            <?php } ?>
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-content">

@@ -15,6 +15,13 @@
     <script src="./admin/app-assets/vendors/js/charts/raphael-min.js"></script>
     <script src="./admin/app-assets/vendors/js/charts/morris.min.js"></script>
     <script src="./admin/app-assets/vendors/js/timeline/horizontal-timeline.js"></script>
+    <script src="./admin/app-assets/vendors/js/ui/prism.min.js"></script>
+    <script src="./admin/app-assets/vendors/js/extensions/jquery.raty.js"></script>
+    <script src="./admin/app-assets/vendors/js/extensions/jquery.cookie.js"></script>
+    <script src="./admin/app-assets/vendors/js/extensions/jquery.treeview.js"></script>
+    <script src="./admin/app-assets/vendors/js/extensions/wNumb.js"></script>
+    <script src="./admin/app-assets/vendors/js/extensions/nouislider.min.js"></script>
+    <script src="./admin/app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -24,6 +31,8 @@
 
     <!-- BEGIN: Page JS-->
     <script src="./admin/app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+    <script src="./admin/app-assets/js/scripts/pages/content-panel-sidebar.js"></script>
+    <script src="./admin/app-assets/js/scripts/pages/ecommerce-product-shop.js"></script>
     <!-- END: Page JS-->
 
 </body>

@@ -21,6 +21,9 @@
     <link rel="stylesheet" type="text/css" href="./admin/app-assets/vendors/css/charts/morris.css">
     <link rel="stylesheet" type="text/css" href="./admin/app-assets/vendors/css/charts/chartist.css">
     <link rel="stylesheet" type="text/css" href="./admin/app-assets/vendors/css/charts/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" type="text/css" href="./admin/app-assets/vendors/css/extensions/nouislider.min.css">
+    <link rel="stylesheet" type="text/css" href="./admin/app-assets/vendors/css/ui/prism.min.css">
+    <link rel="stylesheet" type="text/css" href="./admin/app-assets/vendors/css/forms/icheck/icheck.css">
 
     <!-- END: Vendor CSS-->
 
@@ -38,12 +41,18 @@
     <link rel="stylesheet" type="text/css" href="./admin/app-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="./admin/app-assets/css/pages/timeline.css">
     <link rel="stylesheet" type="text/css" href="./admin/app-assets/css/pages/dashboard-ecommerce.css">
+    <link rel="stylesheet" type="text/css" href="./admin/app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
+    <link rel="stylesheet" type="text/css" href="./admin/app-assets/css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="./admin/app-assets/css/plugins/extensions/noui-slider.min.css">
+    <link rel="stylesheet" type="text/css" href="./admin/app-assets/css/core/colors/palette-noui.css">
+    <link rel="stylesheet" type="text/css" href="./admin/app-assets/css/pages/ecommerce-shop.css">
+    <link rel="stylesheet" type="text/css" href="./admin/app-assets/css/plugins/forms/checkboxes-radios.css">
     <!-- END: Page CSS-->
 
 
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./admin/assets/css/style.css">
     <!-- END: Custom CSS-->
 
 </head>
