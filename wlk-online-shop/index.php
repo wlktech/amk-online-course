@@ -1,16 +1,18 @@
 <?php 
+session_start();
 include("vendor/autoload.php");
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\ProductModel;
 use App\WlkOnlineShop\Databases\CategoryModel;
 
 $db = new ProductModel(new Connection);
-$products = $db->getAllProduct();
+$products = $db->GetAllProduct();
 $product_count = count($products);
 
 // echo "<pre>";
-// print_r($product_count);
+// print_r($products);
 // echo "</pre>";
+// die;
 
 $start = $product_count;
 $limit = 12;
@@ -26,6 +28,39 @@ if(isset($_GET['page'])){
 
 $offset = ($page - 1)* $limit;
 $product_data = $db->ProductPagination($offset, $limit);
+
+
+//session store
+if(isset($_POST['add_to_cart'])){
+    $items = array(
+        'product_id' => $_POST['product_id'],
+        'product_name' => $_POST['product_name'],
+        'price' => $_POST['price'],
+        'quantity' => $_POST['quantity'],
+        'file_name' => $_POST['file_name']
+    );
+    if(isset($_SESSION['cart'])){
+        //check existing product in cart
+        $item_ids = array_column($_SESSION['cart'], 'product_id');
+        if(in_array($_POST['product_id'], $item_ids)){
+            echo "<script>alert('Product is already added in the cart')</script>";
+            echo "<script>window.location = 'index.php'</script>";
+        }else{
+            array_push($_SESSION['cart'], $items);
+        }
+    }else{
+        $_SESSION['cart'] = array($items);
+    }
+}
+
+// if(isset($_SESSION['cart'])){
+//     $cart = $_SESSION['cart'];
+//     echo "<pre>";
+//     print_r($cart);
+//     echo "</pre>";
+//     die;
+// }
+
 
 
 ?>
@@ -62,9 +97,13 @@ include "./includes/topsidebar.php";
                 </div>
                 <div class="content-header-right col-md-6 col-12">
                     <div class="btn-group float-md-right">
-                        <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                        <div class="dropdown-menu arrow"><a class="dropdown-item" href="#"><i class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fa fa-cog mr-1"></i> Settings</a>
+                        <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Order Edit</button>
+                        <div class="dropdown-menu arrow">
+                            <a class="dropdown-item" href="order_index.php"><i class="fa fa-calendar-check mr-1"></i> Order Edit</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><i class="fa fa-cog mr-1"></i> Settings</a>
                         </div>
                     </div>
                 </div>
@@ -76,7 +115,11 @@ include "./includes/topsidebar.php";
                             <div class="card-body">
                                 <span class="shop-title">Products</span>
                                 <span class="float-right">
-                                    <span class="result-text mr-1"> Showing <?= $limit ?> of <?= $product_count; ?> results</span>
+                                    <span class="result-text mr-1">
+                                        <?php if(isset($_SESSION['cart'])){ ?>
+                                        <span class="btn btn-primary">Your Total Order is: <?= count($_SESSION['cart']) ?></span>
+                                        <?php } ?> 
+                                        Showing <?= $limit ?> of <?= $product_count; ?> results</span>
                                     <span class="display-buttons">
                                         <a href="#" class="active"><i class="ft-grid font-medium-2"></i></a>
                                         <a href="#"><i class="ft-list font-medium-2"></i></a>
@@ -106,9 +149,17 @@ include "./includes/topsidebar.php";
                                             </a>
                                             <div class="product-action d-flex justify-content-around">
                                                 <a href="#like" data-toggle="tooltip" data-placement="top" title="Add To Wishlist"><i class="ft-heart"></i></a><span class="saperator">|</span>
-                                                <a href="product_detail.php?id=<?= $product->id ?>" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ft-eye"></i></a><span class="saperator">|</span>
+                                                <a href="product_detail.php?id=<?= $product->p_id ?>" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ft-eye"></i></a><span class="saperator">|</span>
                                                 <a href="#compare" data-toggle="tooltip" data-placement="top" title="Compare"><i class="ft-sliders"></i></a><span class="saperator">|</span>
-                                                <a href="#cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ft-shopping-cart"></i></a>
+                                                <!-- <a href="#cart" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="ft-shopping-cart"></i></a> -->
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="product_id" value="<?= $product->p_id; ?>">
+                                                    <input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
+                                                    <input type="hidden" name="price" value="<?= $product->price; ?>">
+                                                    <input type="hidden" name="file_name" value="<?= $product->file_name; ?>">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                    <button class="btn btn-sm btn-primary" name="add_to_cart" type="submit"><i class="ft-shopping-cart"></i></button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

@@ -34,16 +34,12 @@ class ProductModel
     }
 
     //getAllProduct
-    public function getAllProduct(){
-        try{
-            $query = "SELECT products.*, products.id AS p_id, categories.id AS c_id, categories.* FROM products INNER JOIN categories on products.category_id=categories.id";
-            $statement = $this->db->prepare($query);
-            $statement->execute();
-            $results = $statement->fetchAll();
-            return $results;
-        }catch(PDOException $e){
-            
-        }
+    public function GetAllProduct()
+    {
+    $sql = "SELECT products.*, products.id AS p_id, categories.category_name FROM products INNER JOIN categories ON products.category_id = categories.id";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     //getproductbyID
