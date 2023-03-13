@@ -1,0 +1,16 @@
+{
+    "name": "wlk/chatapp",
+    "autoload": {
+        "psr-4": {
+            "Wlk\\Chatapp\\": "src/Libs/",
+            "Helpers\\": "src/Helpers"
+        }
+    },
+    "authors": [
+        {
+            "name": "wailinnkyaw03",
+            "email": "wailinnkyaw03@gmail.com"
+        }
+    ],
+    "require": {}
+}
