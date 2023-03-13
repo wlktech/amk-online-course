@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include "../vendor/autoload.php";
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\CategoryModel;
@@ -11,7 +12,9 @@ $db = new CategoryModel(new Connection);
 $update_category = $db->UpdateCategory($id, $category_name);
 
 if($update_category){
-    HTTP::redirect('../admin/category_index.php?msg= Category has been updated successfully.');
+    $_SESSION['msg'] = "Category has been updated successfully.";
+    $_SESSION['expire'] = time();
+    HTTP::redirect('../admin/category_index.php');
 }else{
     echo "ERROR";
 }

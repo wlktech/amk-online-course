@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include "../vendor/autoload.php";
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\UserModel;
@@ -15,7 +16,9 @@ $approve_user = $db->UserApprove($id, $status);
 // print_r($approve_user);
 // echo "</pre>";
 if($approve_user){
-    HTTP::redirect("../admin/user_index.php?msg= User has been approved successfully.");
+    $_SESSION['msg'] = "User has been approved successfully";
+    $_SESSION['expire'] = time();
+    HTTP::redirect("../admin/user_index.php");
 }
 
 ?>

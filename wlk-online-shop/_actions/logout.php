@@ -1,7 +1,10 @@
 <?php 
 session_start();
 session_destroy();
-header("location: login.php");
+include "../vendor/autoload.php";
+use Helpers\HTTP;
+
+HTTP::redirect("../login_form.php");
 
 
 ?>

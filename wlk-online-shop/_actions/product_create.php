@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include "../vendor/autoload.php";
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\ProductModel;
@@ -26,7 +27,9 @@ if($type == 'image/jpeg' | $type == 'image/png' | $type == 'image/gif' | $type =
         if(move_uploaded_file($tmp, 'product_image/'.$file_name)){
             $product_create = $db->productCreate($data);
             if($product_create){
-                HTTP::redirect("../admin/product_index.php?msg= Product has been created successfully.");
+                $_SESSION['msg'] = "Product has been created successfully.";
+                $_SESSION['expire'] = time();
+                HTTP::redirect("../admin/product_index.php");
             }else{
                 echo "ERROR";
             }

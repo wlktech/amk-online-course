@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
@@ -71,15 +74,23 @@
                                             Details</span></p>
 
                                     <!-- msg session alert -->
-                                    <?php if(isset($_GET['msg'])){ ?>
-                                            <div class="alert alert-danger alert-dismissible fade show">
-                                                <strong>Failed!</strong><?= $_GET['msg'] ?>
-                                                <button type="button" class="close" data-dismiss="alert">
-                                                <span>&times;</span>
-                                                </button>
-                                            </div>
-                                    <?php unset($_SESSION['msg']) ?>
-                                    <?php } ?>
+                                    <?php if(isset($_SESSION['expire'])){
+                                                $diff = time() - $_SESSION['expire'];
+                                                if($diff > 2){
+                                                    unset($_SESSION['msg']);
+                                                    unset($_SESSION['expire']);
+                                                }
+                                                }
+                                            ?>
+                                            <?php if(isset($_SESSION['msg'])){ ?>   
+                                                <div class="alert alert-danger alert-dismissible fade show mx-2" role="alert">
+
+                                                <?php echo $_SESSION['msg'] ?>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            <?php }?>
                                             <!-- msg session alert -->
                                     <div class="card-body">
                                         <form class="form-horizontal" action="_actions/login.php" novalidate method="post">

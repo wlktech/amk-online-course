@@ -19,7 +19,9 @@ if($user->value=='1'){
     $_SESSION['user'] = $user;
     HTTP::redirect("../admin/user_profile.php");
 }else{
-    HTTP::redirect("../login_form.php?msg= Your Account has not been approved by Admin yet.");
+    $_SESSION['msg']="Email or Password was wrong!";
+    $_SESSION['expire'] = time();
+    HTTP::redirect("../login_form.php");
 }
 // echo "<pre>";
 // print_r($user);

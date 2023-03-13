@@ -86,15 +86,23 @@ include "layouts/sidebar.php";
                                     <div class="card-body card-dashboard">
                                         <p class="card-text">
                                             <!-- msg session alert -->
-                                            <?php if(isset($_GET['msg'])){ ?>
-                                                <div class="alert alert-success alert-dismissible fade show">
-                                                    <strong>Success!</strong><?= $_GET['msg'] ?>
-                                                    <button type="button" class="close" data-dismiss="alert">
-                                                        <span>&times;</span>
+                                            <?php if(isset($_SESSION['expire'])){
+                                                $diff = time() - $_SESSION['expire'];
+                                                if($diff > 2){
+                                                    unset($_SESSION['msg']);
+                                                    unset($_SESSION['expire']);
+                                                }
+                                                }
+                                            ?>
+                                            <?php if(isset($_SESSION['msg'])){ ?>   
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                                                <?php echo $_SESSION['msg'] ?>
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <?php unset($_SESSION['msg']) ?>
-                                            <?php } ?>
+                                            <?php }?>
                                             <!-- msg session alert -->
                                         </p>
                                         <div class="table-responsive">

@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include "../vendor/autoload.php";
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\CategoryModel;
@@ -10,7 +11,9 @@ $db = new CategoryModel(new Connection);
 $create_category = $db->CreateCategory($category_name);
 
 if($create_category){
-    HTTP::redirect('../admin/category_index.php?msg= Category has been created successfully.');
+    $_SESSION['msg'] = "Category has been created successfully.";
+    $_SESSION['expire'] = time();
+    HTTP::redirect('../admin/category_index.php');
 }else{
     echo "ERROR";
 }

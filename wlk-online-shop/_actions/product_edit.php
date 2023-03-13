@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include "../vendor/autoload.php";
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\ProductModel;
@@ -22,7 +23,9 @@ use Helpers\HTTP;
 $db = new ProductModel(new Connection);
 $product_update = $db->ProductUpdate($id, $product_name, $category_id, $price, $old_price, $qty, $description);
 if($product_update){
-    HTTP::redirect('../admin/product_index.php?msg= Product has been updated successfully.');
+    $_SESSION['msg'] = "Product has been updated successfully.";
+    $_SESSION['expire'] =  time();
+    HTTP::redirect('../admin/product_index.php');
 }else{
     echo "ERROR";
 }

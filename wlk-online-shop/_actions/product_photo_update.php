@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include "../vendor/autoload.php";
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\ProductModel;
@@ -19,7 +20,9 @@ if($type == 'image/jpeg' | $type == 'image/png' | $type == 'image/gif' | $type =
         if(move_uploaded_file($tmp, 'product_image/'.$file_name)){
             $product_photo_update = $db->ProductPhotoUpdate($id, $file_name);
             if($product_photo_update){
-                HTTP::redirect("../admin/product_index.php?msg= Product Photo has been updated successfully.");
+                $_SESSION['msg'] = "Product Photo has been updated successfully.";
+                $_SESSION['expire'] =  time();
+                HTTP::redirect("../admin/product_index.php");
             }else{
                 echo "ERROR";
                 die;

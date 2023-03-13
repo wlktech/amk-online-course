@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include "../vendor/autoload.php";
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\UserModel;
@@ -14,7 +15,9 @@ $delete_user = $db->DeleteUser($id);
 // print_r($suspend_user);
 // echo "</pre>";
 if($delete_user){
-    HTTP::redirect("../admin/user_index.php?msg= User has been deleted successfully.");
+    $_SESSION['msg']= "User has been deleted successfully";
+    $_SESSION['expire']=time();
+    HTTP::redirect("../admin/user_index.php");
 }else{
     echo "ERROR";
 }

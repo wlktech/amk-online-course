@@ -1,4 +1,5 @@
-<?php 
+<?php
+session_start(); 
 include "../vendor/autoload.php";
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\UserModel;
@@ -15,7 +16,9 @@ $suspend_user = $db->UserSuspend($id, $status);
 // print_r($suspend_user);
 // echo "</pre>";
 if($suspend_user){
-    HTTP::redirect("../admin/user_index.php?msg= User has been suspended successfully.");
+    $_SESSION['msg'] = "User has been suspended successfully";
+    $_SESSION['expire'] = time();
+    HTTP::redirect("../admin/user_index.php");
 }
 
 ?>

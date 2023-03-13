@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include "../vendor/autoload.php";
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\UserModel;
@@ -15,7 +16,9 @@ $change_role = $db->ChangeRole($id, $role_id);
 // print_r($suspend_user);
 // echo "</pre>";
 if($change_role){
-    HTTP::redirect("../admin/user_index.php?msg= Role has been changed successfully.");
+    $_SESSION['msg'] = "Role has been changed successfully.";
+    $_SESSION['expire'] =  time();
+    HTTP::redirect("../admin/user_index.php");
 }
 
 ?>
