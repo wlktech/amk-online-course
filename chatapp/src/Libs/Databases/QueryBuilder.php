@@ -1,6 +1,8 @@
 <?php
 namespace Wlk\Chatapp\Databases;
 
+use PDO;
+use PDOException;
 
 class QueryBuilder{
     private $db = null;
@@ -13,13 +15,28 @@ class QueryBuilder{
         $bind_values = implode(", :", array_keys($datas));
         $sql = "INSERT INTO $table($column_names) VALUES(:$bind_values)";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         foreach($datas as $key => &$value){
             $stmt->bindParam(":".$key, $value);
         }
         $stmt->execute();
         return true;
     }
+
+    //userlogin
+    public function login($table, $cols, $join, $email){
+        $sql = "SELECT $cols FROM $table WHERE email=:email";
+        if($join != null){
+            $sql .= " $join";
+        }
+        // echo $sql;
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     //getAllJoin
     public function getAll($table, $cols, $join, $where, $order){
         $sql = "SELECT $cols FROM $table";
@@ -32,7 +49,7 @@ class QueryBuilder{
         if($order != null){
             $sql .= " ORDER BY $order";
         }
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $results;
@@ -49,7 +66,7 @@ class QueryBuilder{
             $sql .= " WHERE $where";
         }
         // echo $sql;
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
@@ -63,7 +80,7 @@ class QueryBuilder{
         }
         $edits = rtrim($edits, ',');
         $sql = "UPDATE $table SET $edits WHERE id=:id";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(":id", $id);
         foreach($datas as $key => &$value){
             $stmt->bindParam(":".$key, $value);
@@ -75,7 +92,7 @@ class QueryBuilder{
     //delete
     public function delete($table, $id){
         $sql = "DELETE FROM $table WHERE id=:id";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
         return true;

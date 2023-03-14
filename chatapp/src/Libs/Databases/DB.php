@@ -1,12 +1,10 @@
 <?php
-
 namespace Wlk\Chatapp\Databases;
 
 use PDO;
 use PDOException;
 
-class Connection
-{
+class DB{
   private $dbhost;
   private $dbuser;
   private $dbname;

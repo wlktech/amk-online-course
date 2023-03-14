@@ -7,5 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Wlk\\Chatapp\\' => array($baseDir . '/src/Libs'),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Helpers\\' => array($baseDir . '/src/Helpers'),
+    'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
 );
