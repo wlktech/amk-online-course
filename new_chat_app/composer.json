@@ -1,0 +1,18 @@
+{
+  "name": "new_chat/app",
+  "autoload": {
+    "psr-4": {
+      "Amk\\NewChat\\App\\": "src/Libs/",
+      "Helpers\\": "src/Helpers/"
+    }
+  },
+  "authors": [
+    {
+      "name": "AungYeHtatCoder",
+      "email": "aungyehtatcoder2021@gmail.com"
+    }
+  ],
+  "require": {
+    "fakerphp/faker": "^1.21"
+  }
+}

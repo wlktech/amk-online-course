@@ -102,6 +102,20 @@ class ProductModel
         }
     }
 
+    //product qty change
+    public function product_qty($id, $qty){
+        try{
+            $query = "UPDATE products SET qty=:qty WHERE id=:id";
+            $statement = $this->db->prepare($query);
+            $statement->bindParam(":id", $id);
+            $statement->bindParam(":qty", $qty);
+            $statement->execute();
+            return true;
+        }catch(PDOException $e){
+            
+        }
+    }
+
     //productImageUpdate
     public function ProductPhotoUpdate($id, $file_name){
         try{

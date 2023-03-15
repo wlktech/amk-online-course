@@ -7,14 +7,14 @@ if(isset($_SESSION['user'])){
 
 
 include "./layouts/head.php";
-include "./layouts/navbar.php";
+// include "./layouts/navbar.php";
 
 ?>
     
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="card p-4 mt-5">
+            <div class="card p-4" style="margin-top:20%;">
                 <?php if(isset($_SESSION['expire'])){
                     $diff = time() - $_SESSION['expire'];
                     if($diff > 2){
@@ -56,6 +56,7 @@ include "./layouts/navbar.php";
                         <button class="btn btn-dark" type="submit"><i class="fas fa-unlock me-2"></i>Login</button>
                         <button class="btn btn-dark" type="reset"><i class="fas fa-rotate me-2"></i>Reset</button>
                     </div>
+                    <p>Are you a New User? Please <a href="registerform.php" class=" text-muted">Register Here</a></p>
                 </form>
             </div>
         </div>

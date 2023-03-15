@@ -117,7 +117,7 @@ include "./includes/topsidebar.php";
                                 <span class="float-right">
                                     <span class="result-text mr-1">
                                         <?php if(isset($_SESSION['cart'])){ ?>
-                                        <span class="btn btn-primary">Your Total Order is: <?= count($_SESSION['cart']) ?></span>
+                                        <a href="order_index.php" class="btn btn-primary">Your Total Order is: <?= count($_SESSION['cart']) ?></a>
                                         <?php } ?> 
                                         Showing <?= $limit ?> of <?= $product_count; ?> results</span>
                                     <span class="display-buttons">
@@ -157,7 +157,7 @@ include "./includes/topsidebar.php";
                                                     <input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
                                                     <input type="hidden" name="price" value="<?= $product->price; ?>">
                                                     <input type="hidden" name="file_name" value="<?= $product->file_name; ?>">
-                                                    <input type="hidden" name="quantity" value="1">
+                                                    <input type="hidden" name="quantity" value="<?= $product->qty; ?>">
                                                     <button class="btn btn-sm btn-primary" name="add_to_cart" type="submit"><i class="ft-shopping-cart"></i></button>
                                                 </form>
                                             </div>

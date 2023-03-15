@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtime Chat App | WLK-TECH</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="card p-4 shadow" style="margin-top:10%">
+                    <h3>Realtime Chat App</h3>
+                    <hr>
+
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <p class="mb-0 text-center">This is an error message.</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="my-3">
+                                    <label for="fname" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="my-3">
+                                    <label for="lname" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password">
+                            <i class="fas fa-eye-slash" id="hidepwd"></i>
+                            <i class="fas fa-eye" id="showpwd"></i>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profile" class="form-label">Select Image</label>
+                            <input type="file" name="profile" class="form-control" id="profile">
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-dark w-100" type="submit">Continue To Chat</button>
+                        </div>
+                        <p class="text-center">Already signed up? <a href="" class="text-decoration-none text-muted">Login Now</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="./assets/js/jquery.js"></script>
+    <script src="https://kit.fontawesome.com/b829c5162c.js" crossorigin="anonymous"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/popper.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>

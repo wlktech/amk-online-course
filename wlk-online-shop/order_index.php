@@ -156,7 +156,7 @@ if(isset($_SESSION['cart'])){
                 <div class="content-header-right col-md-6 col-12">
                     <div class="btn-group float-md-right">
                         <button class="btn btn-info dropdown-toggle mb-1" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                        <div class="dropdown-menu arrow"><a class="dropdown-item" href="#"><i class="fa fa-calendar-check mr-1"></i> Calender</a><a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
+                        <div class="dropdown-menu arrow"><a class="dropdown-item" href="index.php"><i class="fas fa-cart mr-1"></i> Shop</a><a class="dropdown-item" href="#"><i class="fa fa-cart-plus mr-1"></i> Cart</a><a class="dropdown-item" href="#"><i class="fa fa-life-ring mr-1"></i> Support</a>
                             <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fa fa-cog mr-1"></i> Settings</a>
                         </div>
                     </div>
@@ -193,6 +193,9 @@ if(isset($_SESSION['cart'])){
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach($carts as $product){ ?>
+                                                        <?php 
+                                                        $total = $product['quantity'] * $product['price'];
+                                                        ?>
                                                     <tr>
                                                         <td>
                                                             <div class="product-img d-flex align-items-center">
@@ -206,11 +209,28 @@ if(isset($_SESSION['cart'])){
                                                         </td>
                                                         <td>
                                                             <div class="input-group">
-                                                                <input type="text" class="text-center count touchspin" value="<?= $product['quantity'] ?>" />
+                                                                <form method="post">
+                                                                    <input type="hidden" name="product_id" value="<?=$product['product_id']?>" />
+                                                                    <input type="text" class="text-center count touchspin" style="width:25px" name="quantity"
+                                                                    value="<?= $product['quantity']?>" />
+                                                                    <button type="submit" name="update" class="btn btn-sm btn-info mt-1">
+                                                                    <i class="ft-refresh-cw"></i>
+                                                                    </button>
+                                                                </form>
+                                                                <?php 
+                                                                if(isset($_POST['update'])) {
+                                                                foreach($_SESSION['cart'] as $key => $value) {
+                                                                    if($value['product_id'] == $_POST['product_id']) {
+                                                                    $_SESSION['cart'][$key]['quantity'] = $_POST['quantity'];
+                                                                    echo "<script>window.location.href='order_index.php'</script>";
+                                                                    }
+                                                                }
+                                                                }
+                                                                ?>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="total-price">$<?= $product['quantity']*$product['price'] ?></div>
+                                                            <div class="total-price">$ <?= $total; ?></div>
                                                         </td>
                                                         <td>
                                                             <?php 
@@ -781,3 +801,4 @@ if(isset($_SESSION['cart'])){
     <!-- BEGIN: Page JS-->
     <script src="admin/app-assets/js/scripts/pages/ecommerce-cart.js"></script>
     <!-- END: Page JS-->
+    

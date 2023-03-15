@@ -1,0 +1,16 @@
+*{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#password{
+    position: relative;
+}
+#hidepwd{
+    position: absolute;
+    top: 405px;
+    right: 40px;
+}
+#showpwd{
+    position: absolute;
+    top: 405px;
+    right: 40px;
+}

@@ -88,18 +88,29 @@ if($_POST['action']== 'profileUpload'){
     $datas = [
         'profile' => $profile
     ];
-    echo "<pre>";
-    print_r($datas);
-    echo $id;
-    echo "</pre>";
-    die;
+    // echo "<pre>";
+    // print_r($datas);
+    // echo $id;
+    // echo "</pre>";
+    // die;
     $profileUpload = $db->update('users', $datas, $id);
     if($profileUpload){
+        $_SESSION['msg'] = "Profile Photo Uploaded Successfully.";
+        $_SESSION['expire'] = time();
+        HTTP::redirect('../profile.php');
+    }
+}else if($_POST['action']=="statuschange"){
+    $id = $_POST['id'];
+    $datas = [
+        'status' => $_POST['status']  
+    ];
+    $statuschange = $db->update('users', $datas, $id);
+    if($statuschange){
+        $_SESSION['msg'] = "User Status Changed Successfully.";
+        $_SESSION['expire'] = time();
         HTTP::redirect('../profile.php');
     }
 }
-
-
 
 if($_GET['action']=='logout'){
     unset($_SESSION['user']);
