@@ -1,13 +1,24 @@
 <?php 
-session_start();
+include("vendor/autoload.php");
+// use App\WlkOnlineShop\Databases\CountryModel;
+// use App\WlkOnlineShop\Databases\StateModel;
+use Helpers\Auth;
+use Helpers\HTTP;
+
+// $countries = CountryModel::CountryOptions();
+// $states = StateModel::StateOptions();
+
+$auth = Auth::check();
+
+if(!isset($auth)){
+    HTTP::redirect('login_form.php');
+}
+
 if(isset($_SESSION['cart'])){
     $carts = $_SESSION['cart'];
 }
 
-// echo "<pre>";
-// print_r($carts);
-// echo "</pre>";
-// die;
+
 
 ?>
 
@@ -145,7 +156,7 @@ if(isset($_SESSION['cart'])){
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="index.php">Home</a>
                                 </li>
                                 <li class="breadcrumb-item active">Shopping Cart
                                 </li>
@@ -192,6 +203,7 @@ if(isset($_SESSION['cart'])){
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <?php if(isset($carts)): ?>
                                                     <?php foreach($carts as $product){ ?>
                                                         <?php 
                                                         $total = $product['quantity'] * $product['price'];
@@ -211,9 +223,9 @@ if(isset($_SESSION['cart'])){
                                                             <div class="input-group">
                                                                 <form method="post">
                                                                     <input type="hidden" name="product_id" value="<?=$product['product_id']?>" />
-                                                                    <input type="text" class="text-center count touchspin" style="width:25px" name="quantity"
+                                                                    <input type="text" class="text-center count touchspin" name="quantity"
                                                                     value="<?= $product['quantity']?>" />
-                                                                    <button type="submit" name="update" class="btn btn-sm btn-info mt-1">
+                                                                    <button type="submit" name="update" class="btn btn-sm btn-info">
                                                                     <i class="ft-refresh-cw"></i>
                                                                     </button>
                                                                 </form>
@@ -248,12 +260,13 @@ if(isset($_SESSION['cart'])){
                                                                 <!-- <a href="#"><i class="ft-trash-2"></i></a> -->
                                                                 <form action="order_index.php" method="post">
                                                                     <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
-                                                                    <button type="submit" class="btn" name="remove"><i class="ft-trash-2 text-danger"></i></button>
+                                                                    <button type="submit" class="btn btn-sm btn-danger" name="remove"><i class="ft-trash-2"></i></button>
                                                                 </form>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <?php } ?>
+                                                    <?php endif ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -288,12 +301,31 @@ if(isset($_SESSION['cart'])){
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body">
-                                                <div class="price-detail">Price (4 items) <span class="float-right">$2800</span></div>
-                                                <div class="price-detail">Delivery Charges <span class="float-right">$100</span></div>
-                                                <div class="price-detail">TAX / VAT <span class="float-right">$0</span></div>
-                                                <hr>
-                                                <div class="price-detail">Payable Amount <span class="float-right">$2900</span></div>
-                                                <div class="total-savings">Your Total Savings on this order $550</div>
+                                            <?php if(isset($carts)): ?>
+                                                <div class="price-detail">Price :(<strong><?= count($carts) ?></strong> items) 
+                                                    <span class="float-right">
+                                                        
+                                                    <?php
+                                                            if(is_array($carts)){
+                                                                $total_item = 0;
+                                                                foreach($carts as $product){
+                                                                    $total_item += ($product['quantity'] * $product['price']);
+                                                                }
+                                                                
+                                                            }else{
+                                                                $total_item=0;
+                                                            }
+                                                            ?>
+                                                            $ <?= $total_item ?>
+                                                            
+                                                    </span>
+                                                </div>
+                                                    <div class="price-detail">Delivery Charges <span class="float-right">$100</span></div>
+                                                    <div class="price-detail">TAX / VAT <span class="float-right">$0</span></div>
+                                                    <hr>
+                                                    <div class="price-detail">Payable Amount <span class="float-right">$<?= $total_item+100+0 ?></span></div>
+                                                    <div class="total-savings">Your Total Savings on this order $<?= $total_item+100+0 ?></div>
+                                                <?php endif ?>
                                             </div>
                                         </div>
                                     </div>
@@ -396,31 +428,14 @@ if(isset($_SESSION['cart'])){
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body">
-                                                <form class="needs-validation" novalidate="">
-                                                    <div class="row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="firstName">First name</label>
-                                                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                                                            <div class="invalid-feedback">
-                                                                Valid first name is required.
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="lastName">Last name</label>
-                                                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                                                            <div class="invalid-feedback">
-                                                                Valid last name is required.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
+                                                
                                                     <div class="mb-3">
                                                         <label for="username">Username</label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">@</span>
                                                             </div>
-                                                            <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                                                            <input type="text" class="form-control" id="username" placeholder="Username" required="" value="<?= $auth->user_name ?>">
                                                             <div class="invalid-feedback">
                                                                 Your username is required.
                                                             </div>
@@ -429,7 +444,7 @@ if(isset($_SESSION['cart'])){
 
                                                     <div class="mb-3">
                                                         <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                                                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                                                        <input type="email" class="form-control" id="email" placeholder="you@example.com" value="<?= $auth->email ?>">
                                                         <div class="invalid-feedback">
                                                             Please enter a valid email address for shipping updates.
                                                         </div>
@@ -437,7 +452,7 @@ if(isset($_SESSION['cart'])){
 
                                                     <div class="mb-3">
                                                         <label for="address">Address</label>
-                                                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                                                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="" value="<?= $auth->address ?>">
                                                         <div class="invalid-feedback">
                                                             Please enter your shipping address.
                                                         </div>
@@ -445,15 +460,15 @@ if(isset($_SESSION['cart'])){
 
                                                     <div class="mb-3">
                                                         <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                                                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                                                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" value="<?= $auth->fix_address ?>">
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-md-5 mb-3">
                                                             <label for="country">Country</label>
                                                             <select class="custom-select d-block w-100" id="country" required="">
-                                                                <option value="">Choose...</option>
-                                                                <option>United States</option>
+                                                                <option value=""><?= $auth->country ?></option>
+                                                                
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Please select a valid country.
@@ -462,7 +477,7 @@ if(isset($_SESSION['cart'])){
                                                         <div class="col-md-4 mb-3">
                                                             <label for="state">State</label>
                                                             <select class="custom-select d-block w-100" id="state" required="">
-                                                                <option value="">Choose...</option>
+                                                                <option value=""><?= $auth->state ?></option>
                                                                 <option>California</option>
                                                             </select>
                                                             <div class="invalid-feedback">
@@ -489,25 +504,25 @@ if(isset($_SESSION['cart'])){
                                                     <hr class="mt-2 mb-4">
 
                                                     <h4 class="mb-1">Payment</h4>
-
+                                                <form class="needs-validation" action="_actions/order_create.php" method="post" novalidate="">
                                                     <div class="d-block my-2">
                                                         <div class="custom-control custom-radio">
-                                                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                                                            <input id="credit" name="payment_method" type="radio" class="custom-control-input" checked="" required="" value="Credit card">
                                                             <label class="custom-control-label" for="credit">Credit card</label>
                                                         </div>
                                                         <div class="custom-control custom-radio">
-                                                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                                                            <input id="debit" name="payment_method" type="radio" class="custom-control-input" required="" value="Debit card">
                                                             <label class="custom-control-label" for="debit">Debit card</label>
                                                         </div>
                                                         <div class="custom-control custom-radio">
-                                                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                                                            <input id="paypal" name="payment_method" type="radio" class="custom-control-input" required="">
                                                             <label class="custom-control-label" for="paypal">Paypal</label>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label for="cc-name">Name on card</label>
-                                                            <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+                                                            <input type="text" class="form-control" id="cc-name" name="card_name" placeholder="" required="">
                                                             <small class="text-muted">Full name as displayed on card</small>
                                                             <div class="invalid-feedback">
                                                                 Name on card is required
@@ -515,7 +530,7 @@ if(isset($_SESSION['cart'])){
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label for="cc-number">Credit card number</label>
-                                                            <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                                                            <input type="text" class="form-control" id="cc-number" name="card_no" placeholder="" required="">
                                                             <div class="invalid-feedback">
                                                                 Credit card number is required
                                                             </div>
@@ -524,18 +539,27 @@ if(isset($_SESSION['cart'])){
                                                     <div class="row">
                                                         <div class="col-md-3 mb-3">
                                                             <label for="cc-expiration">Expiration</label>
-                                                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+                                                            <input type="text" class="form-control" id="cc-expiration" name="exp_date" placeholder="" required="">
                                                             <div class="invalid-feedback">
                                                                 Expiration date required
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <label for="cc-expiration">CVV</label>
-                                                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                                                            <input type="text" class="form-control" id="cc-cvv" name="cvv_no" placeholder="" required="">
                                                             <div class="invalid-feedback">
                                                                 Security code required
                                                             </div>
                                                         </div>
+                                                        <?php if(isset($_SESSION['cart'])): ?>
+                                                        
+                                                        <?php foreach($_SESSION['cart'] as $key->$value): ?>
+                                                            <input type="hidden" name="product_id[]" value="<?= $value['product_id'] ?>">
+                                                            <input type="hidden" name="price[]" value="<?= $value['price'] ?>">
+                                                            <input type="hidden" name="quantity[]" value="<?= $value['quantity'] ?>">
+                                                            <input type="hidden" name="total_price[]" value="<?= $value['price']*$value['quantity'] ?>">
+                                                        <?php endforeach ?>
+                                                        <?php endif ?>
                                                     </div>
                                                     <button class="btn btn-info btn-lg" type="submit">Continue to checkout</button>
                                                 </form>

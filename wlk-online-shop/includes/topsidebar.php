@@ -3,7 +3,10 @@
     <div class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-fixed navbar-dark navbar-without-dd-arrow navbar-shadow" role="navigation" data-menu="menu-wrapper">
         <div class="navbar-container main-menu-content container center-layout" data-menu="menu-container">
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="index.html" data-toggle="dropdown"><i class="la la-home"></i><span data-i18n="Dashboard">Dashboard</span></a>
+                <li class="dropdown nav-item" data-menu="dropdown">
+
+                    <a class="nav-link" href="./admin/dashboard.php"><i class="la la-home"></i><span data-i18n="Dashboard">Dashboard</span></a>
+
                     <!-- <ul class="dropdown-menu">
                         <li class="active" data-menu=""><a class="dropdown-item" href="dashboard-ecommerce.html" data-toggle=""><i class="la la-cart-plus"></i><span data-i18n="eCommerce">eCommerce</span></a>
                         </li>
@@ -13,11 +16,15 @@
                         </li>
                     </ul> -->
                 </li>
+
                 <li class="dropdown nav-item"><a class="nav-link" href="register_form.php"><i class="la la-television"></i><span data-i18n="Templates">Register</span></a>
                 </li>
                 <li class="dropdown nav-item" data-menu="dropdown"><a class=" nav-link" href="login_form.php"><i class="la la-mobile"></i><span data-i18n="Apps">Login</span></a>
                 </li>
-                <li class="dropdown nav-item"><a class=" nav-link" href="#"><i class="la la-file-text"></i><span data-i18n="Pages">Logout</span></a>
+
+
+                <li class="dropdown nav-item"><a class=" nav-link" href="_actions/logout.php"><i class="la la-file-text"></i><span data-i18n="Pages">Logout</span></a>
+
                     <!-- <ul class="dropdown-menu">
                         <li data-menu=""><a class="dropdown-item" href="news-feed.html" data-toggle=""><i class="la la-newspaper-o"></i><span data-i18n="News Feed">News Feed</span></a>
                         </li>

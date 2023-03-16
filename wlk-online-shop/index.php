@@ -4,6 +4,12 @@ include("vendor/autoload.php");
 use App\WlkOnlineShop\Databases\Connection;
 use App\WlkOnlineShop\Databases\ProductModel;
 use App\WlkOnlineShop\Databases\CategoryModel;
+// use Helpers\Auth;
+// use Helpers\HTTP;
+
+
+
+
 
 $db = new ProductModel(new Connection);
 $products = $db->GetAllProduct();

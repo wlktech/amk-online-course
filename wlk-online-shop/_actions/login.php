@@ -17,7 +17,7 @@ if($user->value=='1'){
     HTTP::redirect("../admin/admin_profile.php");
 }else if($user->value=='2'){
     $_SESSION['user'] = $user;
-    HTTP::redirect("../admin/user_profile.php");
+    HTTP::redirect("../order_index.php");
 }else{
     $_SESSION['msg']="Email or Password was wrong!";
     $_SESSION['expire'] = time();

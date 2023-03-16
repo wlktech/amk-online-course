@@ -7,7 +7,7 @@
                 </li>
                 <li class=" navigation-header"><span data-i18n="Ecommerce">Ecommerce</span><i class="la la-ellipsis-h" data-toggle="tooltip" data-placement="right" data-original-title="Ecommerce"></i>
                 </li>
-                <li class=" nav-item"><a href="ecommerce-product-shop.html"><i class="la la-th-large"></i><span class="menu-title" data-i18n="Shop">Shop</span></a>
+                <li class=" nav-item"><a href="../index.php"><i class="la la-th-large"></i><span class="menu-title" data-i18n="Shop">Shop</span></a>
                 </li>
                 <li class=" nav-item"><a href="ecommerce-product-detail.html"><i class="la la-list"></i><span class="menu-title" data-i18n="Product Detail">Product Detail</span></a>
                 </li>
