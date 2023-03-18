@@ -1,6 +1,8 @@
 <?php
 namespace App\WlkOnlineShop\Databases;
 
+use PDO;
+use PDOException;
 
 
 class OrderModel
@@ -38,7 +40,38 @@ class OrderModel
             return -1;
         }
     }
+
+    public function GetAllOrders(){
+        try{
+            $query = "SELECT * FROM orders INNER JOIN products ON orders.product_id=products.id INNER JOIN users ON orders.user_id = users.id ORDER BY orders.id DESC";
+            $statement = $this->db->prepare($query);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            return [];
+
+        }
+    }
+
+    public function GetAllOrdersWithProducts()
+    {
+        $statement = $this->db->prepare("SELECT orders.*, products.product_name, users.user_name, users.profile_img FROM orders INNER JOIN products on orders.product_id = products.id INNER JOIN users ON orders.user_id=users.id ORDER BY orders.id DESC");
+        $statement->execute();
+        return $statement->fetchAll();
+    }
     
 
+    public function OrderPagination($start, $limit)
+    {
+        try{
+            $query = "SELECT orders.*, products.product_name, products.file_name, users.user_name, users.profile_img FROM orders INNER JOIN products ON orders.product_id = products.id INNER JOIN users ON orders.user_id = users.id ORDER BY orders.id DESC LIMIT $start, $limit";
+            $statement = $this->db->prepare($query);
+            $statement->execute();
+            return $statement->fetchAll();
+        }catch(PDOException $e){
+            return $e->getMessage();
+
+        }
+    }
 }
 
